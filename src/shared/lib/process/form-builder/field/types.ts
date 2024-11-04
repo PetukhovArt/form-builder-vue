@@ -1,10 +1,31 @@
+type Rule = { message?: string };
+export type StringRule =
+  | ({ ip: boolean } & Rule)
+  | ({ email: boolean } & Rule)
+  | ({ url: boolean } & Rule)
+  | ({ regex: RegExp } & Rule)
+  | ({ startsWith: string } & Rule)
+  | ({ endsWith: string } & Rule)
+  | ({ min: number; max: number } & Rule);
+
+export type NumberRule =
+  | ({ min: number; max: number } & Rule)
+  | ({ negative: boolean } & Rule)
+  | ({ nonnegative: boolean } & Rule)
+  | ({ positive: boolean } & Rule);
+
 export type FieldBase = {
   label: string;
   name: string;
   defaultValue?: unknown;
 };
 export type TextFieldConfig = FieldBase & {
-  type: "text";
+  type: "text"; // basic text-field
+  validation?: {
+    type: "string" | "number";
+    rules: StringRule[] | NumberRule[];
+    errorType?: "tooltip" | "label"; // default label
+  };
   name: string;
   placeholder?: string;
   prependInnerIcon?: string;
@@ -21,6 +42,7 @@ export type TextFieldConfig = FieldBase & {
   appendInnerIcon?: string;
   hint?: string;
   loading?: boolean;
+  maxLength?: number;
 };
 export type ArrayFieldConfig = FieldBase & {
   type: "array";
@@ -104,4 +126,5 @@ export type FieldValue = unknown;
 export type FieldProps<T extends FieldConfig> = {
   config: T;
   value: FieldValue;
+  error: string | undefined;
 };

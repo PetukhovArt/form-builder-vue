@@ -5,6 +5,8 @@ import {
 } from "@/shared/lib/process/form-builder/form/types";
 import Field from "@/shared/lib/process/form-builder/field/Field.vue";
 import { FieldValue } from "@/shared/lib/process/form-builder/field/types";
+import { createZodSchema } from "@/shared/lib/process/form-builder/form/generate-zod-schema";
+import { z } from "zod";
 
 type Emits = {
   (e: "onSubmit", value: FormValue): void;
@@ -28,15 +30,43 @@ const handleChangeField = (name: string, value: FieldValue) => {
 };
 const onReset = () => {
   formState.value = {};
+  formErrors.value = {};
   emit("onCancel");
 };
 const onSubmit = (e: any) => {
   e?.preventDefault();
+
+  validate();
+
+  if (Object.keys(formErrors.value).length) {
+    return;
+  }
+  // схлапываем дефолтные и измененные, подходит только для плоской формы
   emit("onSubmit", Object.assign({}, defaultValue, formState.value));
   if (resetOnSubmit) {
     formState.value = {};
   }
 };
+let schema: z.ZodTypeAny;
+const formErrors = ref<Record<string, string>>({});
+
+const validate = () => {
+  // if (!schema) return;
+  try {
+    schema.parse(formState.value);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      error.errors.forEach((err) => {
+        formErrors.value[err.path[0]] = err.message;
+      });
+    }
+  }
+  console.log(formErrors);
+};
+
+onMounted(() => {
+  schema = createZodSchema(formConfig.fields);
+});
 </script>
 
 <template>
@@ -48,6 +78,7 @@ const onSubmit = (e: any) => {
         :config="field"
         :value="getFieldValue(field.name)"
         @handleChange="handleChangeField"
+        :error="formErrors[field.name]"
       />
     </div>
 

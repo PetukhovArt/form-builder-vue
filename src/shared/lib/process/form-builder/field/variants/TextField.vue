@@ -12,12 +12,15 @@ const emit = defineEmits<{
 
 <template>
   <v-text-field
-    :density="'compact'"
+    :density="'comfortable'"
+    :error-messages="props.error"
+    :style="{ paddingBottom: props.error ? '10px' : '0' }"
+    :variant="'outlined'"
     :model-value="props.value"
     :name="props.config.name"
-    :v-bind="props.config"
     type="text"
     @update:model-value="emit('handleChange', $event)"
+    v-bind="props.config"
   >
   </v-text-field>
 </template>

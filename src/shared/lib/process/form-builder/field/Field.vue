@@ -42,5 +42,6 @@ function getFieldComponent(type: string) {
     :config="props.config"
     :value="props.value"
     @handleChange="emit('handleChange', props.config.name, $event)"
+    :error="props.error"
   />
 </template>

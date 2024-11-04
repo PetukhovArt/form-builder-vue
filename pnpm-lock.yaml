@@ -29,6 +29,9 @@ importers:
       vuetify:
         specifier: ^3.7.3
         version: 3.7.3(typescript@5.6.3)(vite-plugin-vuetify@2.0.4)(vue@3.5.12(typescript@5.6.3))
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@babel/types':
         specifier: ^7.26.0
@@ -1006,6 +1009,9 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@antfu/utils@0.7.10': {}
@@ -1866,3 +1872,5 @@ snapshots:
   webpack-virtual-modules@0.6.2: {}
 
   yaml@2.6.0: {}
+
+  zod@3.23.8: {}
