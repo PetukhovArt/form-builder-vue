@@ -17,6 +17,7 @@ const visible = ref(props.config.type !== "password");
 
 <template>
   <v-text-field
+    v-bind="props.config"
     :append-inner-icon="
       config.type !== 'password' ? '' : visible ? 'mdi-eye-off' : 'mdi-eye'
     "
@@ -28,7 +29,6 @@ const visible = ref(props.config.type !== "password");
     :name="props.config.name"
     :style="{ paddingBottom: props.config?.hint ? '10px' : '0' }"
     :type="config.type !== 'password' ? 'text' : visible ? 'text' : 'password'"
-    v-bind="props.config"
     @update:model-value="onChange"
     @click:append-inner="visible = !visible"
   >
