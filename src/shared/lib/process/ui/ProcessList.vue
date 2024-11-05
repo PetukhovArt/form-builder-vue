@@ -10,6 +10,7 @@ const dtoConfig = {
       label: "Текст1",
       name: "test",
       defaultValue: "xxx",
+      // maxWidth: 100,
       validation: {
         type: "string",
         rules: [
@@ -19,7 +20,6 @@ const dtoConfig = {
             message: "Строка должна содержать не более 5 символов",
           },
         ],
-        errorType: "label",
       },
     },
     {
@@ -27,34 +27,6 @@ const dtoConfig = {
       label: "Текст1",
       name: "test1",
       defaultValue: "zzz",
-      validation: {
-        type: "string",
-        rules: [
-          {
-            min: 0,
-            max: 5,
-            message: "Строка должна содержать не более 5 символов",
-          },
-        ],
-        errorType: "label",
-      },
-    },
-    {
-      type: "text",
-      label: "Regina",
-      name: "fsdfsdfsdfdsf",
-      defaultValue: "regina",
-      validation: {
-        type: "string",
-        rules: [
-          {
-            min: 6,
-            max: 6,
-            message: "Регина - 6 букв",
-          },
-        ],
-        errorType: "label",
-      },
     },
   ],
 } as const;

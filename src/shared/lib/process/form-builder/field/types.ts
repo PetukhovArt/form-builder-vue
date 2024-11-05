@@ -20,33 +20,21 @@ export type FieldBase = {
   defaultValue?: unknown;
 };
 export type TextFieldConfig = FieldBase & {
-  type: "text"; // basic text-field
+  type: "text" | "password"; // basic text-field
+  class?: string; // css
   validation?: {
     type: "string" | "number";
     rules: StringRule[] | NumberRule[];
-    errorType?: "tooltip" | "label"; // default label
   };
-  name: string;
+  prependInner?: string;
   placeholder?: string;
-  prependInnerIcon?: string;
-  clearable?: boolean;
-  variant?:
-    | "filled"
-    | "underlined"
-    | "outlined"
-    | "plain"
-    | "solo"
-    | "solo-inverted"
-    | "solo-filled";
   maxWidth?: number;
-  appendInnerIcon?: string;
-  hint?: string;
-  loading?: boolean;
   maxLength?: number;
+  hint?: string;
 };
 export type ArrayFieldConfig = FieldBase & {
   type: "array";
-  items: any[];
+  fields: FieldConfig[];
 };
 export type SelectFieldConfig = FieldBase & {
   type: "select";

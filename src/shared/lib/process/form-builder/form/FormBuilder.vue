@@ -51,9 +51,9 @@ let schema: z.ZodTypeAny;
 const formErrors = ref<Record<string, string>>({});
 
 const validate = () => {
-  // if (!schema) return;
+  if (!schema) return;
   try {
-    schema.parse(formState.value);
+    schema.parse(Object.assign({}, defaultValue, formState.value));
   } catch (error) {
     if (error instanceof z.ZodError) {
       error.errors.forEach((err) => {
