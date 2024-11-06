@@ -1,3 +1,5 @@
+import { FormValue } from "@/shared/lib/process/form-builder/form/types";
+
 type Rule = { message?: string };
 export type StringRule =
   | ({ ip: boolean } & Rule)
@@ -19,9 +21,10 @@ export type FieldBase = {
   name: string;
   defaultValue?: unknown;
 };
+
 export type TextFieldConfig = FieldBase & {
   type: "text" | "password"; // basic text-field
-  class?: string; // css
+  class?: string; // css class or tailwind
   validation?: {
     type: "string" | "number";
     rules: StringRule[] | NumberRule[];
@@ -35,6 +38,7 @@ export type TextFieldConfig = FieldBase & {
 export type ArrayFieldConfig = FieldBase & {
   type: "array";
   fields: FieldConfig[];
+  newItemDefault?: FormValue;
 };
 export type SelectFieldConfig = FieldBase & {
   type: "select";

@@ -60,8 +60,9 @@ const validate = () => {
         formErrors.value[err.path[0]] = err.message;
       });
     }
+    //todo delete
+    Object.values(formErrors.value).forEach((err) => console.error(err));
   }
-  console.log(formErrors);
 };
 
 onMounted(() => {

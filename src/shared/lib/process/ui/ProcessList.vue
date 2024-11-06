@@ -6,11 +6,10 @@ const items = ref(["timer", "contact", "camera", "sensor", "va-event"]);
 const dtoConfig = {
   fields: [
     {
-      type: "text",
+      type: "password",
       label: "Текст1",
       name: "test",
       defaultValue: "xxx",
-      // maxWidth: 100,
       validation: {
         type: "string",
         rules: [

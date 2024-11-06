@@ -4,6 +4,7 @@ import {
   FieldConfig,
   FieldProps,
 } from "@/shared/lib/process/form-builder/field/types";
+import ArrayTextField from "@/shared/lib/process/form-builder/field/variants/ArrayTextField.vue";
 
 const props = defineProps<FieldProps<FieldConfig>>();
 const emit = defineEmits<{
@@ -13,9 +14,10 @@ const emit = defineEmits<{
 function getFieldComponent(type: string) {
   switch (type) {
     case "text":
+    case "password":
       return TextField;
     case "array":
-      return TextField;
+      return ArrayTextField;
     case "select":
       return TextField;
     case "multiSelect":
